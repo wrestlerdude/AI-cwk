@@ -46,7 +46,7 @@ Graph::Graph(std::string filename)
 
     nodes.push_back(new Node(i, x, y));
   }
-  
+
   //Read in connections and calculate edges
   for(int i = 0; i < size; i++)
   {
@@ -58,14 +58,5 @@ Graph::Graph(std::string filename)
         nodes[j]->add_Edge(nodes[i]);
     }
   }
-
-  for(auto& n : nodes)
-  {
-    std::cout << "Node " << n->idx << " is connected to Nodes: ";
-    for (auto& e : n->edges)
-    {
-      std::cout << e->dest->idx << " ";
-    }
-    std::cout << '\n';
-  }
+  
 }

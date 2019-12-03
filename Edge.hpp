@@ -5,7 +5,7 @@ struct Node;
 
 struct Edge
 {
-  unsigned int distance;
+  double distance;
   Node* dest;
 
   Edge(Node* src, Node* dest);

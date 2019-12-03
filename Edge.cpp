@@ -18,9 +18,6 @@ Edge::Edge(Node* src, Node* dest)
 
 double Edge::calc_distance(Node* a, Node* b)
 {
-  if (a == b)
-    return 0;
-
   double xs = b->x - a->x;
   double ys = b->y - a->y;
 
