@@ -8,7 +8,7 @@ rem myprogram.exe %1
 rem or
 rem java -jar myprogram.jar %1
 
-
+caveroute.exe %1
 
 set ENDTIME=%TIME%
 

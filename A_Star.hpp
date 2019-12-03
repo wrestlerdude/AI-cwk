@@ -2,4 +2,4 @@
 
 #include "Graph.hpp"
 
-std::vector <int> path_find(Graph & caves);
+std::vector<uint32_t> path_find(Graph& caves, double& total);

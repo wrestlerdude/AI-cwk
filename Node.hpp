@@ -7,6 +7,7 @@ struct Edge;
 
 struct Node
 {
+  unsigned int count = 0;
   bool expanded = false;
   unsigned int idx;
   unsigned int x;

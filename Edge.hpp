@@ -5,7 +5,7 @@ struct Node;
 
 struct Edge
 {
-  double distance;
+  double distance = 0;
   Node* dest;
 
   Edge(Node* src, Node* dest);

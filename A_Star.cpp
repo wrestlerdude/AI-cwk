@@ -4,13 +4,11 @@
 #include <limits>
 #include <algorithm>
 
-std::vector<uint32_t> path_find(Graph& caves) 
+std::vector<uint32_t> path_find(Graph& caves, double& total) 
 {
   uint32_t goal = caves.nodes.back()->idx;
   Node* current_node = caves.nodes.front();
   std::vector<Node*> previous_nodes{ caves.nodes.front() };
-  double count_function = 0;
-  uint32_t nodes_searched = 0;
 
   do
   {
@@ -19,15 +17,14 @@ std::vector<uint32_t> path_find(Graph& caves)
     auto routes = current_node->edges;
     Edge* candidate = nullptr;
     for(auto& option : routes)
-    {      if (std::find(previous_nodes.begin(), previous_nodes.end(), option->dest) != previous_nodes.end() || option->dest->expanded)
+    {
+      if (std::find(previous_nodes.begin(), previous_nodes.end(), option->dest) != previous_nodes.end() || option->dest->expanded)
         continue;
 
-
-      nodes_searched++;
-
       double heuristic_dist = Edge::calc_distance(option->dest, caves.nodes.back());
-      double heuristic_function = count_function + option->distance + heuristic_dist;
-      if (heuristic_function < min_heuristic)
+      //Basic crow's flight heuristic
+      double heuristic_function = (double)(current_node->count + option->distance + heuristic_dist);
+      if (heuristic_function <= min_heuristic)
       {
         candidate = option;
         min_heuristic = heuristic_function;
@@ -43,7 +40,6 @@ std::vector<uint32_t> path_find(Graph& caves)
         {
           current_node = previous_nodes[i];
           previous_nodes.resize(i + 1);
-          count_function = 0;
           break;
         }
         else if(i == 1)
@@ -51,9 +47,9 @@ std::vector<uint32_t> path_find(Graph& caves)
       }
       continue;
     }
-
-    count_function += candidate->distance;
+    candidate->dest->count = (double)(current_node->count + candidate->distance);
     current_node = candidate->dest;
+
     previous_nodes.push_back(current_node);
 
   } while(previous_nodes.back()->idx != goal);
@@ -61,6 +57,8 @@ std::vector<uint32_t> path_find(Graph& caves)
   std::vector<uint32_t> path;
   for(auto& n : previous_nodes)
     path.push_back(n->idx);
+
+  total = current_node->count;
 
   return path;
 }
