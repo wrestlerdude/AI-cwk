@@ -9,8 +9,6 @@ struct Edge
   Node* dest;
 
   Edge(Node* src, Node* dest);
-  ~Edge();
-
 
   static double calc_distance(Node* a, Node* b);
-}
+};

@@ -16,4 +16,4 @@ struct Node
   ~Node();
 
   void add_Edge(Node* dest);
-}
+};

@@ -16,7 +16,7 @@ Edge::Edge(Node* src, Node* dest)
   }
 }
 
-static double Edge::calc_distance(Node* a, Node* b)
+double Edge::calc_distance(Node* a, Node* b)
 {
   if (a == b)
     return 0;
@@ -24,5 +24,5 @@ static double Edge::calc_distance(Node* a, Node* b)
   double xs = b->x - a->x;
   double ys = b->y - a->y;
 
-  return std::sqrt((xs * xs) + (ys * ys))
+  return std::sqrt((xs * xs) + (ys * ys));
 }
